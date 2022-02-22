@@ -6,6 +6,10 @@
     <span>Fresh Episodes</span>
   </div>
 
+    <div class="large-poster" v-show="posterShow" ref="largePoster">
+      <img :src="posterSrc" alt=""/>
+    </div>
+
   <div class="grid grid-cols-3 justify-items-center">
     <div class="movies-column pt-20">
       <div v-for="movie in popular" :key="movie.id" class="movie">
@@ -34,20 +38,43 @@ export default {
     return {
       popular: [],
       lastMovies : [],
-      freshEpisodes : []
+      freshEpisodes : [],
+      posterShow : false,
+      posterSrc : ''
     }
   },
   async mounted() {
-
-
     this.popular = await this.$axios.$get('/api/popular/');
     this.lastMovies = await this.$axios.$get('/api/oldMovies/');
     this.freshEpisodes = await this.$axios.$get('/api/lastEpisodes/');
+
+    const posters = document.querySelectorAll('.poster');
+
+    for (let element of posters) {
+        element.onclick = () => {
+          this.posterSrc = element.src
+          this.posterShow = true
+        }
+    }
+
+    this.$refs.largePoster.onclick = (e) => {
+      this.posterSrc = ''
+      this.posterShow = false
+    }
   }
 }
 </script>
 
 <style>
+
+.large-poster {
+  top : 50px;
+  @apply absolute w-full backdrop-blur-lg backdrop-filter h-full;
+}
+
+.large-poster img {
+  @apply mx-auto;
+}
 
 .episode {
   width : 80%;
@@ -69,14 +96,15 @@ export default {
 }
 
 .movie:hover {
-  transform : perspective(500px) rotateY(22deg) scale3d(1,1,2);
+  transform : perspective(500px) rotateY(22deg);
   transition: all .25s ease;
 }
 
 .poster {
   width: 150px;
   border-radius: 15px;
-  @apply mx-auto;
+  transition : all 2s ease;
+  @apply mx-auto cursor-pointer;
 }
 
 .navbar {
