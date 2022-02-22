@@ -38,6 +38,8 @@ export default {
     }
   },
   async mounted() {
+
+
     this.popular = await this.$axios.$get('/api/popular/');
     this.lastMovies = await this.$axios.$get('/api/oldMovies/');
     this.freshEpisodes = await this.$axios.$get('/api/lastEpisodes/');
@@ -63,6 +65,12 @@ export default {
 
 .movie {
   height: 270px;
+  transition: all .25s ease;
+}
+
+.movie:hover {
+  transform : perspective(500px) rotateY(22deg) scale3d(1,1,2);
+  transition: all .25s ease;
 }
 
 .poster {
