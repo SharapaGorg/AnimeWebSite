@@ -1,15 +1,24 @@
 <template>
   <div ref="root">
     <div class="container_">
-      <div class="navigator point" v-show="activated" ref="point1">
-        <img src='../static/geo.png' alt=""/>
+      <div class='point' v-show="activated" ref="point1">
+        <div class="navigator" style="margin-top : 6px;">
+          <img src='../static/geo.png' alt=""/>
+        </div>
       </div>
-      <div class="navigator point" v-show="activated" ref="point2">
-        <img src='../static/geo.png' alt=""/>
+
+      <div class='point' v-show="activated" ref="point2">
+        <div class="navigator" style="margin-top : 6px;">
+          <img src='../static/geo.png' alt=""/>
+        </div>
       </div>
-      <div class="navigator point" v-show="activated" ref="point3">
-        <img src='../static/geo.png' alt=""/>
+
+      <div class='point' v-show="activated" ref="point3">
+        <div class="navigator" style="margin-top : 6px;">
+          <img src='../static/geo.png' alt=""/>
+        </div>
       </div>
+
       <div class="navigator-container absolute">
         <div class="navigator" @click="trigger">
           <div class="lines">
@@ -98,9 +107,9 @@ export default {
         this.changeState()
 
         setTimeout(() => {
-          this.$refs.point1.style.transform = 'translateY(-100px)'
-          this.$refs.point2.style.transform = 'translateY(-200px)'
-          this.$refs.point3.style.transform = 'translateY(-300px)'
+          this.$refs.point1.style.transform = 'translateY(-120px)'
+          this.$refs.point2.style.transform = 'translateY(-220px)'
+          this.$refs.point3.style.transform = 'translateY(-320px)'
         }, 0)
       } else {
         this.$refs.point1.style.transform = 'translateY(0px)'
@@ -131,9 +140,21 @@ export default {
 }
 
 .point {
-  left: 20px;
+  left: 9px;
   margin-top: 17px !important;
+  transition: all .5s ease;
+  border-radius: 100%;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 4px;
+  bottom : 14px;
+  width: 80px;
+  height: 80px;
   @apply absolute cursor-pointer;
+}
+
+.point:hover {
+  border-color: #eaa500;
 }
 
 .container_ {

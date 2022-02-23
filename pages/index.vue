@@ -1,12 +1,12 @@
 <template>
-  <div ref="root">
+  <div ref="root" class="root">
     <div class="navbar grid grid-cols-3 justify-items-center fixed backdrop-blur-lg backdrop-filter">
       <span v-show="!posterShow">Popular Anime</span>
       <span v-show="!posterShow">Old Anime</span>
       <span v-show="!posterShow">Fresh Episodes</span>
-      <span v-show="posterShow" class="poster-title">Trailer</span>
-      <span v-show="posterShow" class="poster-title">{{ posterTitle }}</span>
-      <span v-show="posterShow" class="poster-title">Description</span>
+      <span v-show="posterShow && posterTrailer" class="poster-title">Trailer</span>
+      <span v-show="posterShow" class="poster-title col-start-2">{{ posterTitle }}</span>
+      <span v-show="posterShow && posterDescription" class="poster-title">Description</span>
     </div>
 
     <div class="large-poster grid md:grid-cols-3 justify-items-center" v-show="posterShow" ref="largePoster">
@@ -16,19 +16,21 @@
         :src="'https://www.youtube.com/watch?v=' + posterTrailer"
         aspect-ratio="16:9"
         thumbnail-quality="standard"
-        :autoplay = true
+        :autoplay=true
         style="height : 50%; width : 90%; margin-top : 60px"
       >
       </LazyYoutube>
       <img :src="posterSrc" alt="" class="md:col-start-2">
-      <span class="poster-description">{{ posterDescription }}</span>
+      <span class="poster-description" v-show="posterDescription">{{ posterDescription }}</span>
     </div>
 
     <div class="grid grid-cols-3 justify-items-center">
       <div class="movies-column pt-20">
+
         <div v-for="movie in popular" :key="movie.id" class="movie" @click="selectPoster(movie)">
-          <img alt="" :src="movie['posterImage']['large']" class="poster"/>
+          <img alt="" :src="movie['posterImage']['large']" class="poster" @load="posterIsLoad(movie.id)"/>
         </div>
+
       </div>
       <div class="movies-column pt-20">
         <div v-for="lastMovie in lastMovies" :key="lastMovie.id" class="movie" @click="selectPoster(lastMovie)">
@@ -56,6 +58,7 @@ export default {
   },
   data() {
     return {
+      empties: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       popular: [],
       lastMovies: [],
       freshEpisodes: [],
@@ -63,10 +66,13 @@ export default {
       posterSrc: '',
       posterTitle: '',
       posterDescription: '',
-      posterTrailer : ''
+      posterTrailer: ''
     }
   },
   methods: {
+    posterIsLoad(movieId) {
+        // delete empty poster
+    },
     selectPoster(movie) {
       this.posterSrc = movie['posterImage']['large']
       this.posterTitle = movie['canonicalTitle']
@@ -99,6 +105,16 @@ export default {
 
 <style>
 
+.empty-poster {
+  width: 150px;
+  height: 220px;
+  border-radius: 15px;
+  background: #CD97F8;
+  border: 2px dashed white;
+  @apply mx-auto;
+}
+
+
 .large-poster {
   overflow-y: auto;
   font-family: 'Exo', sans-serif;
@@ -127,8 +143,8 @@ export default {
   color: white;
   max-height: 50%;
   overflow-y: auto;
-  padding : 10px 15px;
-  background : rgba(0, 0, 0, 0.5);
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .episode {
@@ -147,10 +163,13 @@ export default {
 
 .movie {
   height: 270px;
+}
+
+.movie img {
   transition: all .25s ease;
 }
 
-.movie:hover {
+.movie img:hover {
   transform: perspective(500px) rotateY(22deg);
   transition: all .25s ease;
 }
