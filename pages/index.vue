@@ -4,13 +4,23 @@
       <span v-show="!posterShow">Popular Anime</span>
       <span v-show="!posterShow">Old Anime</span>
       <span v-show="!posterShow">Fresh Episodes</span>
-      <span v-show="posterShow" class="col-start-2 poster-title">{{ posterTitle }}</span>
-      <span v-show="posterShow" class="poster-title w-full" style="text-align : left">Description</span>
+      <span v-show="posterShow" class="poster-title">Trailer</span>
+      <span v-show="posterShow" class="poster-title">{{ posterTitle }}</span>
+      <span v-show="posterShow" class="poster-title">Description</span>
     </div>
 
-    <div class="large-poster grid md:grid-cols-3" v-show="posterShow" ref="largePoster">
-      <span></span>
-      <img :src="posterSrc" alt=""/>
+    <div class="large-poster grid md:grid-cols-3 justify-items-center" v-show="posterShow" ref="largePoster">
+      <LazyYoutube
+        v-show="posterTrailer"
+        ref="animeTrailer"
+        :src="'https://www.youtube.com/watch?v=' + posterTrailer"
+        aspect-ratio="16:9"
+        thumbnail-quality="standard"
+        :autoplay = true
+        style="height : 50%; width : 90%; margin-top : 60px"
+      >
+      </LazyYoutube>
+      <img :src="posterSrc" alt="" class="md:col-start-2">
       <span class="poster-description">{{ posterDescription }}</span>
     </div>
 
@@ -36,8 +46,14 @@
 </template>
 
 <script>
+
+import {LazyYoutube} from 'vue-lazytube'
+
 export default {
   name: 'IndexPage',
+  components: {
+    LazyYoutube
+  },
   data() {
     return {
       popular: [],
@@ -46,7 +62,8 @@ export default {
       posterShow: false,
       posterSrc: '',
       posterTitle: '',
-      posterDescription: ''
+      posterDescription: '',
+      posterTrailer : ''
     }
   },
   methods: {
@@ -54,17 +71,27 @@ export default {
       this.posterSrc = movie['posterImage']['large']
       this.posterTitle = movie['canonicalTitle']
       this.posterDescription = movie['description']
+      this.posterTrailer = movie['youtubeVideoId']
       this.posterShow = true
+
+      console.log('https://www.youtube.com/watch?v=' + this.posterTrailer)
+
+      this.$store.commit('changeNavigatorState')
+      this.$store.commit('changeNavigatorStatus', 'onlyClose')
     }
   },
   async mounted() {
     this.popular = await this.$axios.$get('/api/popular/');
     this.lastMovies = await this.$axios.$get('/api/oldMovies/');
     this.freshEpisodes = await this.$axios.$get('/api/lastEpisodes/');
-
-    this.$refs.largePoster.onclick = () => {
-      this.posterSrc = ''
-      this.posterShow = false
+  },
+  watch: {
+    '$store.state.navigatorActivated': function (activated) {
+      if (!activated) {
+        // close large poster
+        this.posterSrc = ''
+        this.posterShow = false
+      }
     }
   }
 }
@@ -79,7 +106,7 @@ export default {
 }
 
 .large-poster img {
-  margin-top: 50px;
+  margin-top: 60px;
   @apply mx-auto;
 }
 
@@ -93,9 +120,9 @@ export default {
 }
 
 .poster-description {
-  width: 80%;
+  width: 90%;
   text-align: justify;
-  margin-top: 50px;
+  margin-top: 60px;
   font-size: 20px;
   color: white;
   max-height: 50%;
