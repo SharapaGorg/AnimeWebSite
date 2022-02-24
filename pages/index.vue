@@ -27,14 +27,14 @@
     <div class="grid grid-cols-3 justify-items-center">
       <div class="movies-column pt-20">
 
-        <div v-for="movie in popular" :key="movie.id" class="movie" @click="selectPoster(movie)">
-          <img alt="" :src="movie['posterImage']['large']" class="poster" @load="posterIsLoad(movie.id)"/>
+        <div v-for="movie in popular" :key="movie.id" class="movie">
+          <img alt="" :src="movie['posterImage']['large']" class="poster" @load="posterIsLoad(movie.id)" @click="selectPoster(movie)"/>
         </div>
 
       </div>
       <div class="movies-column pt-20">
-        <div v-for="lastMovie in lastMovies" :key="lastMovie.id" class="movie" @click="selectPoster(lastMovie)">
-          <img alt="" :src="lastMovie['posterImage']['large']" class="poster"/>
+        <div v-for="lastMovie in lastMovies" :key="lastMovie.id" class="movie">
+          <img alt="" :src="lastMovie['posterImage']['large']" class="poster" @click="selectPoster(lastMovie)"/>
         </div>
       </div>
       <div class="movies-column pt-16">

@@ -15,7 +15,7 @@ export default {
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
-      {rel : 'stylesheet', href : 'https://fonts.googleapis.com/css2?family=Exo:wght@100&display=swa'}
+      {rel : 'stylesheet', href : 'https://fonts.googleapis.com/css2?family=Exo:wght@400&display=swap'}
     ]
   },
 
