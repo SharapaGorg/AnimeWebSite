@@ -1,5 +1,5 @@
 <template>
-  <div ref="root" style="width :fit-content">
+  <div ref="root" class="w-full">
     <input :placeholder="placeholder" v-model="inputData"/>
   </div>
 </template>
@@ -15,6 +15,11 @@ export default {
     return {
       inputData : ''
     }
+  },
+  watch: {
+    '$store.state.searchInput' : function (value) {
+      this.inputData = value
+    }
   }
 }
 </script>
@@ -22,12 +27,14 @@ export default {
 <style scoped>
 
 input {
+  background : #f6f6f6;
   padding : 5px;
   border-radius: 5px;
-  width : 300px;
   height : 40px;
   text-indent: 10px;
   outline: none;
+  top : 20px;
+  @apply md:w-1/2 lg:w-1/3 mx-auto block relative;
 }
 
 </style>

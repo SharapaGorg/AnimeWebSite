@@ -28,7 +28,8 @@
       <div class="movies-column pt-20">
 
         <div v-for="movie in popular" :key="movie.id" class="movie">
-          <img alt="" :src="movie['posterImage']['large']" class="poster" @load="posterIsLoad(movie.id)" @click="selectPoster(movie)"/>
+          <img alt="" :src="movie['posterImage']['large']" class="poster" @load="posterIsLoad(movie.id)"
+               @click="selectPoster(movie)"/>
         </div>
 
       </div>
@@ -71,7 +72,7 @@ export default {
   },
   methods: {
     posterIsLoad(movieId) {
-        // delete empty poster
+      // delete empty poster
     },
     selectPoster(movie) {
       this.posterSrc = movie['posterImage']['large']
@@ -80,14 +81,15 @@ export default {
       this.posterTrailer = movie['youtubeVideoId']
       this.posterShow = true
 
-      console.log('https://www.youtube.com/watch?v=' + this.posterTrailer)
-
       this.$store.commit('changeNavigatorState')
       this.$store.commit('changeNavigatorStatus', 'onlyClose')
     }
   },
   async mounted() {
-    this.popular = await this.$axios.$get('/api/popular/');
+    this.popular = await this.$axios.$post('/api/popular/', {
+      limit: 10,
+      offset : 0
+    });
     this.lastMovies = await this.$axios.$get('/api/oldMovies/');
     this.freshEpisodes = await this.$axios.$get('/api/lastEpisodes/');
   },
@@ -103,95 +105,3 @@ export default {
 }
 </script>
 
-<style>
-
-.empty-poster {
-  width: 150px;
-  height: 220px;
-  border-radius: 15px;
-  background: #CD97F8;
-  border: 2px dashed white;
-  @apply mx-auto;
-}
-
-
-.large-poster {
-  overflow-y: auto;
-  font-family: 'Exo', sans-serif;
-  @apply absolute w-full backdrop-blur-lg backdrop-filter h-full;
-}
-
-.large-poster img {
-  margin-top: 60px;
-  @apply mx-auto;
-}
-
-.poster-title {
-  font-size: 25px !important;
-  color: white;
-  font-weight: bold;
-  font-family: 'Exo', sans-serif;
-  margin-top: 25px;
-  @apply mx-auto text-center;
-}
-
-.poster-description {
-  width: 90%;
-  text-align: justify;
-  margin-top: 60px;
-  font-size: 20px;
-  color: white;
-  max-height: 50%;
-  overflow-y: auto;
-  padding: 10px 15px;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.episode {
-  width: 80%;
-  background: white;
-  font-weight: bold;
-  border-radius: 10px;
-  @apply mx-auto px-4 py-2 my-3 cursor-pointer;
-}
-
-.navbar span {
-  font-size: 20px;
-  color: white;
-  margin-top: 5px;
-}
-
-.movie {
-  height: 270px;
-}
-
-.movie img {
-  transition: all .25s ease;
-}
-
-.movie img:hover {
-  transform: perspective(500px) rotateY(22deg);
-  transition: all .25s ease;
-}
-
-.poster {
-  width: 150px;
-  border-radius: 15px;
-  transition: all 2s ease;
-  @apply mx-auto cursor-pointer;
-}
-
-.navbar {
-  width: 100vw;
-  height: 50px;
-  z-index: 10;
-}
-
-.movies-column {
-  background: #CD97F8;
-  width: 300px;
-  height: 100vh;
-  overflow: auto;
-}
-
-</style>

@@ -5,12 +5,13 @@ const api = new kitsu();
 let app = new express();
 app.use(express.json())
 
-app.get('/popular/', async (req, res) => {
+app.post('/popular/', async (req, res) => {
     const result = await api.get('anime', {
       params: {
         sort :'-averageRating',
         page: {
-          limit : 20
+          limit : req.body.limit,
+          offset : req.body.offset
         }
       }
     });

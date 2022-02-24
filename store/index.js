@@ -1,6 +1,7 @@
 export const state = () => ({
   navigatorActivated: false,
-  navigatorStatus: 'default' // default / onlyClose
+  navigatorStatus: 'default', // default / onlyClose
+  searchInput : ''
 })
 
 export const mutations = {
@@ -9,6 +10,9 @@ export const mutations = {
   },
   changeNavigatorStatus(state, status) {
     state.navigatorStatus = status
+  },
+  setSearchInput(state, value) {
+    state.searchInput = value
   }
 }
 export const actions = {}
