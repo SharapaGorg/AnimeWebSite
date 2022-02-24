@@ -1,14 +1,19 @@
 <template>
-    <div ref="root" style="height : 100vh">
+  <div ref="root" style="height : 100vh">
+    <div class="account-container">
 
       <div class="avatar-container">
-        <div class="gradient-border" id="box">
+        <div class="gradient-border">
           <div class="avatar">
             <img src="../static/avatar.jpg" alt=""/>
           </div>
         </div>
       </div>
+
+      <span class="username">SharapaGorg</span>
+
     </div>
+  </div>
 </template>
 
 <script>
@@ -19,44 +24,45 @@ export default {
 
 <style scoped>
 
-.avatar-container  {
-  top : 25px;
-  width : fit-content;
+.account-container {
+  background: #CD97F8;
+  width: 500px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-radius: 10px;
+  top : 100px;
   @apply mx-auto relative;
 }
 
-.avatar {
-  width : 220px;
-  height : 220px;
-  overflow : hidden;
-  border-radius: 100%;
+.username {
+  font-size : 23px;
+  color : #f6f6f6;
+  text-decoration: underline;
+  font-family: 'Exo', sans-serif;
+  @apply block text-center;
+}
+
+.avatar-container {
+  width: fit-content;
   @apply mx-auto;
 }
 
-#box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width :220px;
-  height : 220px;
-  color: white;
-  font-size: 2.5rem;
+.avatar {
+  width: 220px;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 100%;
+  top : 10px;
+  @apply mx-auto relative;
 }
+
 .gradient-border {
   background: #1D1F20;
   position: relative;
-  border-radius: 100%;
-}
-.gradient-border:after {
-  content: '';
-  position: absolute;
-  top: calc(-1 * 10px);
-  left: calc(-1 * 10px);
-  height: calc(100% + 10px * 2);
-  width: calc(100% + 10px * 2);
+  height: 240px;
+  width: 240px;
   background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
   border-radius: 100%;
-  z-index: -1;
   animation: animatedgradient 3s ease alternate infinite;
   background-size: 300% 300%;
 }
