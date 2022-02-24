@@ -1,19 +1,20 @@
 <template>
   <div ref="root">
     <div class="container_">
-      <div class='point' v-show="activated" ref="point1">
+
+      <div class='point' v-show="activated && statusDefault" ref="point1">
         <div class="navigator" style="margin-top : 6px;">
           <img src='../static/geo.png' alt=""/>
         </div>
       </div>
 
-      <div class='point' v-show="activated" ref="point2">
+      <div class='point' v-show="activated && statusDefault" ref="point2">
         <div class="navigator" style="margin-top : 6px;">
           <img src='../static/geo.png' alt=""/>
         </div>
       </div>
 
-      <div class='point' v-show="activated" ref="point3">
+      <div class='point' v-show="activated && statusDefault" ref="point3">
         <div class="navigator" style="margin-top : 6px;">
           <img src='../static/geo.png' alt=""/>
         </div>
@@ -39,17 +40,20 @@ export default {
   computed: {
     activated() {
       return this.$store.state.navigatorActivated
+    },
+    statusDefault() {
+      return this.$store.state.navigatorStatus === 'default'
     }
   },
   watch: {
     '$store.state.navigatorActivated': function (val) {
+      console.log(this.$store.state.navigatorStatus)
       if (this.$store.state.navigatorStatus === 'onlyClose') {
         if (val) {
           this.activate()
         } else {
           this.disActivate()
         }
-        this.changeStatus('default')
       }
     }
   },
@@ -140,14 +144,14 @@ export default {
 }
 
 .point {
-  left: 9px;
+  left: 10px;
   margin-top: 17px !important;
   transition: all .5s ease;
   border-radius: 100%;
   border-style: solid;
   border-color: transparent;
   border-width: 4px;
-  bottom : 14px;
+  bottom: 12px;
   width: 80px;
   height: 80px;
   @apply absolute cursor-pointer;
