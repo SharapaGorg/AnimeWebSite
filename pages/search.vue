@@ -84,7 +84,7 @@ export default {
     for (let i = 0; i < 10; i++) {
       const movies = await this.$axios.$post('/api/popular/', {
         limit: 15,
-        offset: i * 15
+        offset: i * 15 + 1
       })
 
       for (let movie of movies) {

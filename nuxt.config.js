@@ -38,8 +38,35 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/markdownit'
   ],
+  markdownit: {
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+    typographer: true,
+    runtime: true,
+    html: false,
+    use: [
+      [
+        'markdown-it-anchor',
+        {
+          level: 1,
+          // slugify: string => string,
+          permalink: true,
+          // renderPermalink: (slug, opts, state, permalink) => {},
+          permalinkClass: 'header-anchor',
+          permalinkSymbol: '¶',
+          permalinkBefore: true
+        }
+      ],
+      'markdown-it-attrs',
+      'markdown-it-div',
+      'markdown-it-toc-done-right',
+      'markdown-it-emoji'
+    ]
+  },
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
