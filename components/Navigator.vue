@@ -304,7 +304,8 @@ export default {
   border-radius: 100%;
   margin-top: -25px;
   bottom: 30px;
-  background: #f6f6f6;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 55%, transparent 45%);
+
 
   @apply relative mx-auto;
 }

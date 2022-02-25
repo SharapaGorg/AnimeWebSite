@@ -75,7 +75,7 @@ export default {
   background: #CD97F8;
   box-shadow:  15px 15px 22px #b686dd,
   -15px -15px 22px #e4a8ff;
-  @apply px-3 py-1 mx-auto mt-3 text-justify;
+  @apply text-justify mx-auto px-3 py-1 mt-5;
 }
 
 .account-stat {
