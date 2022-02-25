@@ -34,7 +34,7 @@ input {
   text-indent: 10px;
   outline: none;
   top : 20px;
-  @apply md:w-1/2 lg:w-1/3 mx-auto block relative;
+  @apply block relative mx-auto md:w-1/2 lg:w-1/3;
 }
 
 </style>

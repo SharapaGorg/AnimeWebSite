@@ -15,7 +15,7 @@
 .large-poster {
   overflow-y: auto;
   font-family: 'Exo', sans-serif;
-  @apply absolute w-full backdrop-blur-lg backdrop-filter h-full;
+  @apply absolute w-full backdrop-blur-lg backdrop-filter h-full z-10 mt-[50px];
 }
 
 .large-poster img {
@@ -72,10 +72,7 @@
 }
 
 .poster {
-  width: 150px;
-  border-radius: 15px;
-  transition: all 2s ease;
-  @apply mx-auto cursor-pointer;
+  @apply w-[150px] mx-auto cursor-pointer transition duration-200 rounded-2xl;
 }
 
 .navbar {
@@ -85,7 +82,7 @@
 }
 
 .movies-column {
-  background: #CD97F8;
+  @apply bg-transparent/50 backdrop-blur;
   width: 300px;
   height: 100vh;
   overflow: auto;

@@ -1,9 +1,9 @@
 <template>
   <div ref="root" class="root">
-    <div class="grid fixed grid-cols-3 justify-items-center backdrop-filter backdrop-blur-lg navbar">
-      <span v-show="!posterShow">Popular Anime</span>
-      <span v-show="!posterShow">Old Anime</span>
-      <span v-show="!posterShow">Fresh Episodes</span>
+    <div class="grid fixed grid-cols-3 justify-items-center bg-transparent/20 backdrop-filter backdrop-blur-lg navbar font-bold z-20">
+      <span v-show="!posterShow" class="poster-title">Popular Anime</span>
+      <span v-show="!posterShow" class="poster-title">Old Anime</span>
+      <span v-show="!posterShow" class="poster-title">Fresh Episodes</span>
       <span v-show="posterShow && posterTrailer" class="poster-title">Trailer</span>
       <span v-show="posterShow" class="col-start-2 poster-title">{{ posterTitle }}</span>
       <span v-show="posterShow && posterDescription" class="poster-title">Description</span>

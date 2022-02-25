@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <div class="navigator-container absolute">
+      <div class="absolute navigator-container">
         <div class="navigator" @click="trigger">
           <div class="lines">
             <div class="line" ref="firstLine"></div>
@@ -262,7 +262,7 @@ export default {
   height: 30px;
   left: 15px;
   top: 9px;
-  @apply relative inline-block;
+  @apply inline-block relative;
 }
 
 .line {
@@ -271,7 +271,7 @@ export default {
   height: 5px;
   width: 40px;
   transition: all .5s ease;
-  @apply mx-auto my-1 absolute;
+  @apply absolute mx-auto my-1;
 }
 
 .lines {
@@ -305,7 +305,8 @@ export default {
   margin-top: -25px;
   bottom: 30px;
   background: #f6f6f6;
-  @apply mx-auto relative;
+
+  @apply relative mx-auto;
 }
 
 .navigator-container {
@@ -314,7 +315,7 @@ export default {
   border-radius: 100%;
   border: 4px solid #eaa500;
   top: 10px;
-  @apply mx-auto cursor-pointer relative;
+  @apply relative mx-auto cursor-pointer;
 }
 
 

@@ -16,17 +16,14 @@ export default {
 <style>
 
 html {
-  height: 100vh;
-  width: 100vw;
-  background: #D44E4E;
-  overflow-x: hidden;
+  @apply h-screen w-screen overflow-x-hidden;
+  @apply bg-gradient-to-br from-amber-300 via-yellow-200 to-amber-300;
 }
 
 footer {
-  height: 40px;
-  margin-top: -40px;
-  background : #f6f6f6;
   @apply w-full fixed;
+  @apply h-[40px] -mt-[40px] z-20;
+  @apply bg-white/80 backdrop-blur;
 }
 
 </style>
