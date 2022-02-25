@@ -13,7 +13,7 @@
       <span class="username">SharapaGorg</span>
 
       <div class="account-description">
-        <div class="header text-center font-bold">
+        <div class="font-bold text-center header">
           I am the developer of this anime site
         </div>
 
@@ -25,11 +25,11 @@
       </div>
 
       <div class="account-stat">
-        <span class="text-right pr-4">Viewed anime:</span>
+        <span class="pr-4 text-right">Viewed anime:</span>
         <span class="pl-4">{{ viewed }}</span>
-        <span class="text-right pr-4">Favourite anime:</span>
+        <span class="pr-4 text-right">Favourite anime:</span>
         <span class="pl-4">{{ favouriteAnime }}</span>
-        <span class="text-right pr-4">Favourite character</span>
+        <span class="pr-4 text-right">Favourite character</span>
         <span class="pl-4">{{ favouriteCharacter }}</span>
       </div>
 
@@ -75,7 +75,7 @@ export default {
   background: #CD97F8;
   box-shadow:  15px 15px 22px #b686dd,
   -15px -15px 22px #e4a8ff;
-  @apply text-justify mx-auto px-3 py-1 mt-3;
+  @apply px-3 py-1 mx-auto mt-3 text-justify;
 }
 
 .account-stat {
@@ -95,7 +95,7 @@ export default {
   padding-bottom: 25px;
   border-radius: 10px;
   top: 100px;
-  @apply mx-auto relative;
+  @apply relative mx-auto;
 }
 
 .username {
@@ -117,7 +117,7 @@ export default {
   overflow: hidden;
   border-radius: 100%;
   top: 10px;
-  @apply mx-auto relative;
+  @apply relative mx-auto;
 }
 
 .gradient-border {

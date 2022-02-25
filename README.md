@@ -14,4 +14,4 @@ $ yarn build
 $ yarn start
 ```
 
-###Anime website based on Kitsu API
+### Anime website based on Kitsu API

@@ -1,6 +1,6 @@
 <template>
   <div ref="root" style="height : 100vh">
-    <div class="large-poster grid md:grid-cols-3 justify-items-center"
+    <div class="grid justify-items-center large-poster md:grid-cols-3"
          v-show="posterShow" ref="largePoster"
          style="padding-top: 20px">
 

@@ -1,15 +1,15 @@
 <template>
   <div ref="root" class="root">
-    <div class="navbar grid grid-cols-3 justify-items-center fixed backdrop-blur-lg backdrop-filter">
+    <div class="grid fixed grid-cols-3 justify-items-center backdrop-filter backdrop-blur-lg navbar">
       <span v-show="!posterShow">Popular Anime</span>
       <span v-show="!posterShow">Old Anime</span>
       <span v-show="!posterShow">Fresh Episodes</span>
       <span v-show="posterShow && posterTrailer" class="poster-title">Trailer</span>
-      <span v-show="posterShow" class="poster-title col-start-2">{{ posterTitle }}</span>
+      <span v-show="posterShow" class="col-start-2 poster-title">{{ posterTitle }}</span>
       <span v-show="posterShow && posterDescription" class="poster-title">Description</span>
     </div>
 
-    <div class="large-poster grid md:grid-cols-3 justify-items-center" v-show="posterShow" ref="largePoster">
+    <div class="grid justify-items-center large-poster md:grid-cols-3" v-show="posterShow" ref="largePoster">
       <LazyYoutube
         v-show="posterTrailer"
         ref="animeTrailer"
@@ -25,7 +25,7 @@
     </div>
 
     <div class="grid grid-cols-3 justify-items-center">
-      <div class="movies-column pt-20">
+      <div class="pt-20 movies-column">
 
         <div v-for="movie in popular" :key="movie.id" class="movie">
           <img alt="" :src="movie['posterImage']['large']" class="poster" @load="posterIsLoad(movie.id)"
@@ -33,12 +33,12 @@
         </div>
 
       </div>
-      <div class="movies-column pt-20">
+      <div class="pt-20 movies-column">
         <div v-for="lastMovie in lastMovies" :key="lastMovie.id" class="movie">
           <img alt="" :src="lastMovie['posterImage']['large']" class="poster" @click="selectPoster(lastMovie)"/>
         </div>
       </div>
-      <div class="movies-column pt-16">
+      <div class="pt-16 movies-column">
         <div v-for="episode in freshEpisodes" :key="episode.id" class="episode">
           {{ episode['canonicalTitle'] }}
         </div>
